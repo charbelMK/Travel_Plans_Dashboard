@@ -1,5 +1,5 @@
 import React from 'react';
-import { BellIcon } from '@heroicons/react/outline'
+import { BellIcon, MoonIcon } from '@heroicons/react/outline'
 import Search from './Search';
 import Filter from './Filter';
 
@@ -12,6 +12,7 @@ function Feed() {
             sm:justify-between py-3 px-3 sticky z-50">
                 <h1 className="font-bold mr-auto ">MY LIST</h1>
                 <div className="flex space-x-7 items-center justify-center">
+                    <MoonIcon className="md:hidden xl:hidden sm:inline h-5 rounded-full cursor-pointer"/>
                     <h3>DARK MODE</h3>
                     <BellIcon className="hidden xl:inline h-5 rounded-full cursor-pointer"/>
 

@@ -3,7 +3,21 @@ import ContentCard from '../components/ContentCard'
 import Feed from '../components/Feed'
 import Sidebar from '../components/Sidebar'
 
-export default function Home() {
+const defaultEndpoint = 'https://restcountries.com/v2/all'
+
+export async function getServerSideProps() {
+  const res = await fetch(defaultEndpoint);
+  const data = await res.json();
+  return {
+    props: {
+      data
+    }
+  }
+}
+
+export default function Home({ data }) {
+  console.log(data)
+
   return (
     <div className="">
       <Head>
@@ -17,18 +31,16 @@ export default function Home() {
         <Feed />
 
         {/* Content Card */}
-        <div className="grid grid-cols-1 sm:items-center sm:ml-auto space-x-4 md:grid-cols-3 xl:grid-cols-4 ">
-          <ContentCard />
-          <ContentCard />
-          <ContentCard />
-          <ContentCard />
-          <ContentCard />
-          <ContentCard />
-          <ContentCard />
-          <ContentCard />
-          <ContentCard />
-          <ContentCard />
-        </div>
+        <ul className="grid grid-cols-1 sm:items-center sm:ml-auto space-x-4 md:grid-cols-3 xl:grid-cols-4 ">
+          {data.map(result => {
+            const {name} = result;
+            return (
+              <li key={name}>
+                <ContentCard result={result}/>
+              </li>
+            )
+          })}
+        </ul>
         </div>
       </main>
     </div>
